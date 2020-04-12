@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,6 @@ public class TargetingSearchController {
     @GetMapping
     public List<AdAccountTargetingUnified> search() throws APIException {
         var account = accountService.getAccount();
-        return account.getTargetingSearch().requestAllFields().execute().stream().collect(Collectors.toList());
+        return new ArrayList<>(account.getTargetingSearch().requestAllFields().execute());
     }
 }

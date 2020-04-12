@@ -37,7 +37,7 @@ public class ExceptionHandlerControllerAdvice {
     public Response<Object> handleValidationExceptions(APIException ex) {
         logger.error("Exception occurred. ", ex);
 
-        var result = new Response<Object>(false);
+        var result = new Response<>(false);
         Map<String, String> errors = new HashMap<>();
         errors.put("error", ex.getMessage());
         result.setErrors(errors);

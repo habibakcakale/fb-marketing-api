@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,16 +29,13 @@ public class CampaignController {
     public Response<List<Campaign>> getCampaigns() throws APIException {
         var campaignsResult = accountService.getAccount().getCampaigns()
                 .requestAllFields().execute();
-        var result = campaignsResult.stream().collect(Collectors.toList());
+        var result = new ArrayList<>(campaignsResult);
         return new Response<>(result);
     }
 
     @GetMapping("{id}")
     public Campaign getCampaign(@PathVariable String id) throws APIException {
-        Campaign campaign = Campaign.fetchById(id, accountService.getContext());
-        return campaign;
-
-
+        return Campaign.fetchById(id, accountService.getContext());
     }
 
     @DeleteMapping("{id}")
@@ -49,13 +47,12 @@ public class CampaignController {
 
     @GetMapping("{id}/adsets")
     public Response<List<AdSet>> getAdSets(@PathVariable String id) throws APIException {
-        var list = Campaign.fetchById(id, accountService.getContext())
+        var list = new ArrayList<>(new Campaign(id, accountService.getContext())
                 .getAdSets()
                 .requestAllFields()
                 .requestInstagramActorIdField(false)
-                .execute()
-                .stream()
-                .collect(Collectors.toList());
+                .requestAccountIdField(false)
+                .execute());
         return new Response<>(list);
     }
 

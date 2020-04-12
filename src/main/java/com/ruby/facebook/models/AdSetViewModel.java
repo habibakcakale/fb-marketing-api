@@ -13,8 +13,10 @@ public class AdSetViewModel {
     private AdSet.EnumBillingEvent billingEvent;
     private AdSet.EnumOptimizationGoal optimizationGoal;
     private long bidAmount;
-    private String customAudience;
-    private String prospectingAudience;
+    private String savedAudience;
+    private String[] userDevice;
+    private String[] userOs;
+    private AdSetPromotedObjectViewModel promotedObject;
     public String getName() {
         return name;
     }
@@ -79,19 +81,35 @@ public class AdSetViewModel {
         this.bidAmount = bidAmount;
     }
 
-    public String getCustomAudience() {
-        return customAudience;
+    public String getSavedAudience() {
+        return savedAudience;
     }
 
-    public void setCustomAudience(String customAudience) {
-        this.customAudience = customAudience;
+    public void setSavedAudience(String savedAudience) {
+        this.savedAudience = savedAudience;
     }
 
-    public String getProspectingAudience() {
-        return prospectingAudience;
+    public AdSetPromotedObjectViewModel getPromotedObject() {
+        return promotedObject;
     }
 
-    public void setProspectingAudience(String prospectingAudience) {
-        this.prospectingAudience = prospectingAudience;
+    public void setPromotedObject(AdSetPromotedObjectViewModel promotedObject) {
+        this.promotedObject = promotedObject;
+    }
+
+    public String[] getUserDevice() {
+        return userDevice;
+    }
+
+    public void setUserDevice(String[] userDevice) {
+        this.userDevice = userDevice;
+    }
+
+    public String[] getUserOs() {
+        return userOs;
+    }
+
+    public void setUserOs(String[] userOs) {
+        this.userOs = userOs;
     }
 }

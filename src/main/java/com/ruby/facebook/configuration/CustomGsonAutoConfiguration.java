@@ -57,9 +57,7 @@ public class CustomGsonAutoConfiguration extends GsonAutoConfiguration {
                 .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
                         context.serialize(src.format(DateTimeFormatter.ISO_DATE_TIME)));
 
-        customizers.forEach((c) -> {
-            c.customize(builder);
-        });
+        customizers.forEach((c) -> c.customize(builder));
         return builder;
     }
 }

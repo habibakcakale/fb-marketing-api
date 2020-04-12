@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,6 @@ public class AudienceController {
     @GetMapping
     public Response<List<SavedAudience>> getSaved() throws APIException {
         APINodeList<SavedAudience> savedAudiences = accountService.getAccount().getSavedAudiences().requestAllFields().execute();
-        return new Response<>(savedAudiences.stream().collect(Collectors.toList()));
+        return new Response<>(new ArrayList<>(savedAudiences));
     }
 }
